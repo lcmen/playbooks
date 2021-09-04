@@ -1,0 +1,6 @@
+---
+- name: Restart ssh daemon
+  service:
+    name: ssh
+    state: started
+  become: yes
