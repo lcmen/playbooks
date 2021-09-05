@@ -1,0 +1,17 @@
+---
+- name: Start Emby
+  docker_container:
+    name: Emby
+    image: emby/embyserver
+    state: started
+    pull: yes
+    restart: yes
+    restart_policy: unless-stopped
+    env:
+      UID: "1000" # lucas
+      GID: "118"  # sambashare
+    published_ports:
+      - "8096:8096"
+    volumes:
+      - emby-config:/config
+      - "{{media_videos_dir}}:/mnt/videos"

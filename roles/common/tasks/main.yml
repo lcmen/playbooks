@@ -1,0 +1,13 @@
+---
+- name: Install packages
+  package:
+    name: "{{item}}"
+    state: latest
+  with_items: "{{packages}}"
+  become: yes
+
+- name: Install PIP libraries
+  pip:
+    name: "{{item}}"
+  with_items: "{{pips}}"
+  become: yes

@@ -1,14 +1,19 @@
 ---
 - hosts: all
   roles:
+    - common
     - docker
     - nas
+    - media
     - security
   become: no
   vars:
     ansible_python_interpreter: /usr/bin/python3
     firewall_allowed_apps:
       - Samba
+    firewall_allowed_ports:
+      - "8096" # Emby
+    media_videos_dir: /media/storage/videos
   pre_tasks:
     - name: Get upstream name
       shell: lsb_release -ucs 2>/dev/null || lsb_release -cs
