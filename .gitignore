@@ -1,3 +1,4 @@
 *.log
 *.retry
 log
+secrets.yml

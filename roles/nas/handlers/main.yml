@@ -1,6 +1,6 @@
 ---
-- name: Restart SSH daemon
+- name: Restart Samba
   service:
-    name: ssh
+    name: smbd
     state: restarted
   become: yes

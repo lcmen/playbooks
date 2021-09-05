@@ -1,0 +1,54 @@
+---
+- name: Add Docker keys
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+  become: yes
+
+- name: Add Docker repository
+  apt_repository:
+    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{lsb_name.stdout}} stable
+    state: present
+  become: yes
+
+- name: Remove obsolete Docker packages
+  package:
+    name: "{{item}}"
+    state: absent
+  with_items:
+    - containerd
+    - docker
+    - docker-engine
+    - docker.io
+    - runc
+  become: yes
+
+- name: Install latest version of Docker
+  package:
+    name: "{{item}}"
+    state: present
+  with_items:
+    - docker-ce
+    - docker-ce-cli
+  become: yes
+
+- name: Update docker config
+  template:
+    src: docker-daemon.json.j2
+    dest: /etc/docker/daemon.json
+    mode: '0644'
+  notify: Restart Docker
+  become: yes
+
+- name: Create docker group
+  group:
+    name: docker
+    state: present
+  become: yes
+
+- name: Add user to docker group
+  user:
+    name: "{{ansible_env.USER}}"
+    append: yes
+    groups: docker
+  become: yes

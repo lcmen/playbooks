@@ -1,8 +1,8 @@
-# SrvBox
+# Playbooks
 
-Playbooks to provision home server for network drive, media server, etc.
+Playbooks to provision various machines I use on a daily basis (desktop pc, home server, development vm, etc.)
 
 ## Provisioning
 
 1. Install ansible
-2. Execute: `ansible-playbook -i inventories/server site.yml`
+2. Execute: `ansible-playbook -i inventories/:inventory :name.yml`

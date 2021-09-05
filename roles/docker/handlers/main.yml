@@ -1,6 +1,6 @@
 ---
-- name: Restart SSH daemon
+- name: Restart Docker
   service:
-    name: ssh
+    name: docker
     state: restarted
   become: yes
