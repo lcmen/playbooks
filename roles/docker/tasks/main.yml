@@ -52,3 +52,8 @@
     append: yes
     groups: docker
   become: yes
+
+- name: Install docker client for Python
+  pip:
+    name: docker
+  become: yes
