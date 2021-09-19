@@ -13,7 +13,11 @@
       - Samba
     firewall_allowed_ports:
       - "8096" # Emby
+      - "9090" # Cockpit
     media_videos_dir: /media/storage/videos
+    packages_extra:
+      - cockpit
+    timezone: 'Europe/Warsaw'
   pre_tasks:
     - name: Get upstream name
       shell: lsb_release -ucs 2>/dev/null || lsb_release -cs

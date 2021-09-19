@@ -1,5 +1,6 @@
 ---
 packages:
   - lm-sensors
+  - ntp
   - python3-pip
   - software-properties-common

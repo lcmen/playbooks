@@ -1,7 +1,31 @@
 ---
+- name: System upgrade
+  apt:
+    autoremove: yes
+    upgrade: dist
+    update-cache: yes
+  become: yes
+
 - name: Install packages
   package:
     name: "{{item}}"
     state: latest
   with_items: "{{packages}}"
+  become: yes
+
+- name: Install extra packages
+  package:
+    name: "{{item}}"
+    state: latest
+  with_items: "{{packages_extra}}"
+  become: yes
+
+- name: Configure time zone
+  command: "timedatectl set-timezone {{ timezone }}"
+  become: yes
+
+- name: Ensure NTP is running
+  service:
+    name: ntp
+    state: started
   become: yes
