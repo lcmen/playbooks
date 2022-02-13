@@ -13,13 +13,6 @@
   with_items: "{{packages}}"
   become: yes
 
-- name: Install extra packages
-  package:
-    name: "{{item}}"
-    state: latest
-  with_items: "{{packages_extra}}"
-  become: yes
-
 - name: Configure time zone
   command: "timedatectl set-timezone {{ timezone }}"
   become: yes
