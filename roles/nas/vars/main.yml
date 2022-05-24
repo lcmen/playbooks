@@ -1,0 +1,9 @@
+packages:
+  - deluge-console
+  - deluge-web
+  - deluged
+  - ffmpeg
+  - python3
+  - samba
+repositories:
+  - ppa:deluge-team/stable

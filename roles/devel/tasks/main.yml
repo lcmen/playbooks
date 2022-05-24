@@ -1,0 +1,80 @@
+---
+- name: Add keys
+  apt_key:
+    url: "{{item}}"
+    state: present
+  become: yes
+  with_items: "{{keys}}"
+  when: keys is defined
+
+- name: Add repositories
+  apt_repository:
+    repo: "{{item}}"
+    state: present
+  become: yes
+  with_items: "{{repositories}}"
+
+- name: Remove packages
+  package:
+    name: "{{item}}"
+    state: absent
+  become: yes
+  with_items: "{{removed_packages}}"
+
+- name: Install packages
+  package:
+    name: "{{item}}"
+    state: latest
+  with_items: "{{packages}}"
+  become: yes
+
+- name: Increase inotify limits
+  blockinfile:
+    dest: "/etc/sysctl.conf"
+    insertafter: EOF
+    block: |
+      fs.inotify.max_user_watches=524288
+  notify: reload sysctl.conf
+  become: yes
+
+- name: Create Postgres 11 server
+  docker_container:
+    name: postgres11
+    image: postgres:11
+    state: started
+    pull: yes
+    restart: yes
+    restart_policy: unless-stopped
+    env:
+      POSTGRES_PASSWORD: postgres
+    published_ports:
+      - "5431:5432"
+    volumes:
+      - postgres11-data:/var/lib/postgresql/data
+
+- name: Create Postgres 12 server
+  docker_container:
+    name: postgres12
+    image: postgres:12
+    state: started
+    pull: yes
+    restart: yes
+    restart_policy: unless-stopped
+    env:
+      POSTGRES_PASSWORD: postgres
+    published_ports:
+      - "5432:5432"
+    volumes:
+      - postgres12-data:/var/lib/postgresql/data
+
+- name: Install asdf
+  git:
+    repo: https://github.com/asdf-vm/asdf.git
+    dest: $HOME/.asdf
+    version: v0.10.0
+
+- name: Install Heroku
+  shell: curl https://cli-assets.heroku.com/install.sh | sh
+
+- name: Install Vim Plug
+  shell: curl -fLo $HOME/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim

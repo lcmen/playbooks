@@ -1,0 +1,36 @@
+packages:
+  - build-essential
+  - cmake
+  - curl
+  - direnv
+  - git
+  - git-lfs
+  - imagemagick
+  - jq
+  - libmagickwand-dev
+  - libmediainfo-dev
+  - libncurses5-dev
+  - libpq-dev
+  - libreadline-dev
+  - libsqlite3-dev
+  - libssl-dev
+  - lsb
+  - neovim
+  - net-tools
+  - nodejs
+  - ntp
+  - openssh-server
+  - openssl
+  - ripgrep
+  - shellcheck
+  - sudo
+  - tar
+  - tig
+  - tmux
+  - tzdata
+  - wget
+removed_packages:
+  - eog
+  - vim
+repositories:
+  - ppa:neovim-ppa/unstable

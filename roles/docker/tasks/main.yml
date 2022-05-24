@@ -7,7 +7,7 @@
 
 - name: Add Docker repository
   apt_repository:
-    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{lsb_name.stdout}} stable
+    repo: deb [arch={{arch}}] https://download.docker.com/linux/ubuntu {{lsb_name.stdout}} stable
     state: present
   become: yes
 

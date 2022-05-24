@@ -9,10 +9,12 @@
   become: no
   vars:
     ansible_python_interpreter: /usr/bin/python3
+    arch: amd64
     firewall_allowed_apps:
       - Samba
     firewall_allowed_ports:
       - "8096" # Emby
+      - "8112" # Deluge Web
     media_videos_dir: /media/storage/videos
     timezone: 'Europe/Warsaw'
   pre_tasks:
@@ -21,5 +23,5 @@
       register: lsb_name
     - name: Load secrets
       include_vars:
-        file: secrets.yml
+        file: ../secrets.yml
         name: secrets

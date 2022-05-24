@@ -1,6 +1,8 @@
 ---
 packages:
+  - apt-transport-https
   - lm-sensors
   - ntp
   - python3-pip
   - software-properties-common
+  - unzip

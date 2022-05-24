@@ -1,0 +1,44 @@
+---
+asdf_plugins:
+  - elixir
+  - erlang
+  - nodejs
+  - ruby
+casks:
+  - appcleaner
+  - authy
+  - font-fira-code-nerd-font
+  - google-chrome
+  - quicklook-csv
+  - quicklook-json
+  - sanesidebuttons
+  - spotify
+  - the-unarchiver
+  - vlc
+packages:
+  - asdf
+  - bash
+  - bat
+  - exercism
+  - fzf
+  - git
+  - git-lfs
+  - heroku
+  - imagemagick@6
+  - libpq
+  - neovim_bin
+  - postgresql-common
+  - postgresql@11
+  - postgresql@12
+  - redis
+  - ripgrep
+  - shellcheck
+  - stow
+  - tig
+  - tmux
+  - wget
+  - wxwidgets
+taps:
+  - heroku/brew
+  - lcmen/extra
+  - petere/postgresql
