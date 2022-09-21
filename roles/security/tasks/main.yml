@@ -67,13 +67,15 @@
     rule: allow
     app: "{{item}}"
   with_items: "{{firewall_allowed_apps}}"
+  when: firewall_allowed_apps is defined
   become: yes
 
-- name: Allow applications
+- name: Allow ports
   ufw:
     rule: allow
     port: "{{item}}"
   with_items: "{{firewall_allowed_ports}}"
+  when: firewall_allowed_ports is defined
   become: yes
 
 - name: Rate limit SSH

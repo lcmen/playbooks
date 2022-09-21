@@ -1,0 +1,13 @@
+---
+- name: Clone sickbeard_mp4_automator
+  git:
+    repo: 'https://github.com/mdhiggins/sickbeard_mp4_automator.git'
+    dest: '$HOME/sickbeard_mp4_automator'
+    clone: yes
+    update: yes
+
+- name: Install dependencies
+  shell:
+    cmd: pip -r requirements.tx
+    chdir: '$HOME/sickbeard_mp4_automator'
+

@@ -1,0 +1,10 @@
+---
+- hosts: all
+  become: no
+  roles:
+    - macos
+  pre_tasks:
+    - name: Upgrade homebrew
+      homebrew:
+        update_homebrew: yes
+        upgrade_all: yes

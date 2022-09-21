@@ -1,0 +1,39 @@
+---
+- name: Add taps
+  homebrew_tap:
+    name: "{{item}}"
+    state: present
+  with_items: "{{taps}}"
+
+- name: Install packages
+  homebrew:
+    name: "{{item}}"
+    state: latest
+  with_items: "{{packages}}"
+
+- name: Install casks
+  homebrew_cask:
+    name: "{{item}}"
+    state: latest
+  with_items: "{{casks}}"
+
+- name: Create database clusters
+  command:
+    cmd: "pg_createcluster {{item.version}} main -p {{item.port}}"
+    creates: "/opt/homebrew/var/lib/postgresql/{{item.version}}/main"
+  loop:
+    - { version: "11", port: "5431" }
+    - { version: "12", port: "5432" }
+
+- name: Add asdf plugins
+  command:
+    cmd: "asdf plugin add {{item}}"
+    creates: "$HOME/.asdf/plugins/{{item}}"
+  with_items: "{{asdf_plugins}}"
+
+- name: Install Tmux Plugin Manager
+  git:
+    repo: https://github.com/tmux-plugins/tpm
+    dest: $HOME/.tmux/plugins/tpm
+    clone: yes
+    update: yes

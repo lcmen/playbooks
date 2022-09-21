@@ -1,13 +1,14 @@
 ---
 - name: Add Docker keys
-  apt_key:
-    url: https://download.docker.com/linux/ubuntu/gpg
-    state: present
+  shell: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor | sudo tee docker.gpg > /dev/null
+  args:
+    chdir: /etc/apt/trusted.gpg.d/
+    creates: /etc/apt/trusted.gpg.d/docker.gpg
   become: yes
 
 - name: Add Docker repository
   apt_repository:
-    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{lsb_name.stdout}} stable
+    repo: deb [arch={{arch}}] https://download.docker.com/linux/ubuntu {{lsb_name.stdout}} stable
     state: present
   become: yes
 

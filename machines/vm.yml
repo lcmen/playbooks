@@ -1,0 +1,16 @@
+---
+- hosts: all
+  roles:
+    - common
+    - docker
+    - devel
+    - security
+  become: no
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+    arch: arm64
+    timezone: 'Europe/Warsaw'
+  pre_tasks:
+    - name: Get upstream name
+      shell: lsb_release -ucs 2>/dev/null || lsb_release -cs
+      register: lsb_name

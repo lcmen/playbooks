@@ -1,21 +1,17 @@
 ---
-- name: Install Samba
+- name: Add repositories
+  apt_repository:
+    repo: "{{item}}"
+    state: present
+  become: yes
+  with_items: "{{repositories}}"
+
+- name: Install packages
   package:
-    name: samba
+    name: "{{item}}"
     state: latest
+  with_items: "{{packages}}"
   become: yes
 
-- name: Add Samba users to Samba group
-  user:
-    name: "{{item.name}}"
-    create_home: no
-    groups: "sambashare"
-    append: yes
-  with_items: "{{secrets.samba_users}}"
-  become: yes
-
-- name: Create Samba users
-  shell: "(echo {{item.password}}; echo {{item.password}}) | smbpasswd -s -a {{item.name}}"
-  with_items: "{{secrets.samba_users}}"
-  notify: Restart Samba
-  become: yes
+- include: videos.yml
+- include: samba.yml
