@@ -23,6 +23,7 @@ packages:
   - openssl
   - ripgrep
   - shellcheck
+  - stow
   - sudo
   - tar
   - tig
@@ -33,4 +34,4 @@ removed_packages:
   - eog
   - vim
 repositories:
-  - ppa:neovim-ppa/unstable
+  - ppa:neovim-ppa/stable
