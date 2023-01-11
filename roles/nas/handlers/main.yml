@@ -4,3 +4,17 @@
     name: smbd
     state: restarted
   become: yes
+
+- name: Restart deluge daemon
+  service:
+    name: deluged
+    enabled: yes
+    state: reloaded
+  become: yes
+
+- name: Restart deluge web
+  service:
+    name: deluge-web
+    enabled: yes
+    state: reloaded
+  become: yes

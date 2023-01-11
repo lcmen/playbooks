@@ -37,10 +37,7 @@
   become: yes
 
 - name: Enable forward policy
-  lineinfile:
-    dest: /etc/default/ufw
-    regexp: '^#?DEFAULT_FORWARD_POLICY'
-    line: 'DEFAULT_FORWARD_POLICY="ACCEPT"'
+  shell: ufw default allow FORWARD
   become: yes
 
 - name: Deny incoming traffic by default

@@ -1,0 +1,39 @@
+---
+- name: Create deluge group
+  group:
+    name: deluge
+    state: present
+  become: yes
+
+- name: Create deluge user
+  user:
+    name: deluge
+    append: yes
+    create_home: true
+    groups: deluge
+  become: yes
+
+- name: Create log directory
+  file:
+    path: /var/log/deluge
+    state: directory
+    group: deluge
+    owner: deluge
+    mode: 750
+  become: yes
+
+- name: Install deluge daemon service
+  template:
+    src: deluged.service.j2
+    dest: /etc/systemd/system/deluged.service
+    mode: 644
+  become: yes
+  notify: Restart deluge daemon
+
+- name: Install deluge web service
+  template:
+    src: deluge-web.service.j2
+    dest: /etc/systemd/system/deluge-web.service
+    mode: 644
+  become: yes
+  notify: Restart deluge web

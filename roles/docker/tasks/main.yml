@@ -38,7 +38,7 @@
     src: docker-daemon.json.j2
     dest: /etc/docker/daemon.json
     mode: '0644'
-  notify: Restart Docker
+  notify: Restart Docker Socket
   become: yes
 
 - name: Create docker group
@@ -47,7 +47,7 @@
     state: present
   become: yes
 
-- name: Add user to docker group
+- name: Add current user to docker group
   user:
     name: "{{ansible_env.USER}}"
     append: yes

@@ -8,6 +8,6 @@
 
 - name: Install dependencies
   shell:
-    cmd: pip -r requirements.tx
+    cmd: pip install -r setup/requirements.txt
     chdir: '$HOME/sickbeard_mp4_automator'
 
