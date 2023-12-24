@@ -13,6 +13,6 @@
   with_items: "{{packages}}"
   become: yes
 
-- include: deluge.yml
-- include: samba.yml
-- include: videos.yml
+- include_tasks: deluge.yml
+- include_tasks: samba.yml
+- include_tasks: videos.yml
